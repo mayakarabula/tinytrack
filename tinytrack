@@ -1,0 +1,22 @@
+#!/bin/sh
+
+echo "🏳️‍⚧️  meds are important, have a nice day 💖"
+echo ""
+
+activities="androcur\nE\nantidepressants\nasthma meds"
+
+cat ~/.config/ttlog.csv | sed -e 's/,/ ,/g' | column -t -s,
+
+new=$(echo $activities | fzf --height=6)
+time=$(date)
+timetamp=$(date +%s)
+
+if [[ -z "$new" ]]; then
+  exit 0
+fi
+
+echo $new
+echo "yay ✨"
+
+echo "$new,$time,$timetamp" >> ~/.config/ttlog.csv
+
